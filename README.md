@@ -9,5 +9,5 @@
 ![Image text](https://github.com/ken-0/QRCodeHelper/blob/7946a9d8eaa50f52476828b1ae9bebb3dce366d5/example%20imgs/2.png)  
 ![Image text](https://github.com/ken-0/QRCodeHelper/blob/7946a9d8eaa50f52476828b1ae9bebb3dce366d5/example%20imgs/3.png)  
  - 勾选“开启截图捕获”后程序将最小化到任务栏，只要剪贴板内容为图片，就会自动识别其中的二维码。
- - 右键任务栏图标，可以关闭截图捕获，或退出程序。
+ - 右键任务栏图标，可以关闭截图捕获，或退出程序。  
 ![Image text](https://github.com/ken-0/QRCodeHelper/blob/7946a9d8eaa50f52476828b1ae9bebb3dce366d5/example%20imgs/4.png)  
