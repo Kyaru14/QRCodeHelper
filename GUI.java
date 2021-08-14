@@ -19,7 +19,7 @@ public class GUI {
 
     static {
         System.setErr(System.out);
-        sysClipboard.setContents(sysClipboard.getContents(null),systemClipboardMonitor);
+        sysClipboard.setContents(sysClipboard.getContents(null), systemClipboardMonitor);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException classNotFoundException) {
@@ -42,12 +42,11 @@ public class GUI {
             if (clipFunc.isSelected()) {
                 systemClipboardMonitor.setEnabled(true);
                 mainWindow.vanish();
-                if (SystemTray.isSupported())
-                {// 判断当前平台是否支持系统托盘
+                if (SystemTray.isSupported()) {// 判断当前平台是否支持系统托盘
                     SystemTray st = SystemTray.getSystemTray();
-                    Image image = Toolkit.getDefaultToolkit().getImage("logo.png");//定义托盘图标的图片
+                    BufferedImage image = QREncoder.createTransparentBufferedImage("qrcode helper",10,10);//定义托盘图标的图片
                     TrayIcon ti = new TrayIcon(image);
-                    ti.setToolTip ("QRCode");
+                    ti.setToolTip("QRCode");
                     ti.setImageAutoSize(true);
                     PopupMenu popupMenu1 = new PopupMenu();
                     MenuItem disable = new MenuItem("disable capture");
@@ -61,7 +60,7 @@ public class GUI {
                     exit.addActionListener(exe -> System.exit(0));
                     popupMenu1.add(disable);
                     popupMenu1.add(exit);
-                    ti.setPopupMenu (popupMenu1);
+                    ti.setPopupMenu(popupMenu1);
                     try {
                         st.add(ti);
                     } catch (AWTException ex) {
@@ -290,15 +289,16 @@ public class GUI {
         msgWindow.setVisible(true);
     }
 }
+
 class SystemClipboardMonitor implements ClipboardOwner {
-
-    public SystemClipboardMonitor(){
-
-    }
 
     private boolean isEnabled = false;
 
-    public void setEnabled(boolean isEnabled){
+    public SystemClipboardMonitor() {
+
+    }
+
+    public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
 
@@ -309,11 +309,11 @@ class SystemClipboardMonitor implements ClipboardOwner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (isEnabled && clipboard.isDataFlavorAvailable(DataFlavor.imageFlavor)){
+        if (isEnabled && clipboard.isDataFlavorAvailable(DataFlavor.imageFlavor)) {
             BufferedImage bufferedImage = ClipBoardToolKit.getImage(clipboard.getContents(null));
             String content = QRDecoder.decode(bufferedImage);
-            if(content!=null){
-                Window window = new Window("识别结果",300,150);
+            if (content != null) {
+                Window window = new Window("识别结果", 300, 150);
                 JTextArea result = new JTextArea(content);
                 result.setLineWrap(true);
                 result.setColumns(30);
@@ -333,7 +333,7 @@ class SystemClipboardMonitor implements ClipboardOwner {
                 window.addKeyListener(new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
-                        if(e.getKeyChar() == 10){
+                        if (e.getKeyChar() == 10) {
                             window.vanish();
                         }
                     }
@@ -351,7 +351,7 @@ class SystemClipboardMonitor implements ClipboardOwner {
                 window.show();
             }
         }
-        clipboard.setContents(clipboard.getContents(null),this);
+        clipboard.setContents(clipboard.getContents(null), this);
     }
 
 }
